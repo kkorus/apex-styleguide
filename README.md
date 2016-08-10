@@ -1,11 +1,10 @@
-# Apex Styleguide #
+# Apex Style Guide #
 
+This document contains apex style guide. Begining from naming convetions, code structure to best practices. You don't have to stick rigidly to this rules. Make any modifications that fits you better, only be consistent.
 
-This document contains apex styleguide.
+## Table of Contents ##
 
 1. Apex Basics
-1.1. Naming
-1.2. Code structure
 2. Unit Testing
 3. Triggers
 4. Visualforce
@@ -14,6 +13,11 @@ This document contains apex styleguide.
 ----------
 
 ## Apex Basics ##
+
+###  Prefixes ###
+
+
+
 
 ###  Naming ###
 
@@ -33,15 +37,25 @@ Methods | Camel
 > - Use a noun or noun phrase to name a class.
 > - Use abbreviations sparingly.
 > - Do not use the underscore character (_).
+
 ```
 public class AccountPlanService {
   // ...
 }
 ```
 
+- Interface name should start with capital  `I` letter and follow the same rules as Classes. 
+```
+public interface IPurchaseOrder {
+    Double discount();
+}
+```
+
 - Use camelCase naming convetions for methods, variables and properties in Apex.
 
-> **Note:**  - Built-in types start with capital letter, eg ID, Integer, String. Methods verbs.
+> **Note:**  
+> - Built-in types should start with capital letter like ID, Integer, String. 
+>  - Use verbs or verb phrases to name methods.
 
 ```
 private String myPrivateField;
@@ -51,12 +65,12 @@ public Integer myPublicProperty {
 	set { prop = value;
 }
 
-public static void calculateRisks() {
+public static void myPublicMethod() {
   Integer localVariable = 0;
 }
 ```
 
-- Don't use set, list, .etc while naming variable storing collections.
+- Don't use `set`, `list`, `map` keywords for naming variable storing collections.
 ```
 // avoid
 List<Account> accountsList = new List<Account>();
@@ -67,6 +81,11 @@ Map<ID, Opporunity> opportunitiesMap = new Map<ID, Opportunity>();
 List<Account> accounts = new List<Account>();
 Set<String> names = new Set<String>();
 Map<ID, Opporunity> opportunities= new Map<ID, Opportunity>();
+```
+
+- Constant variables should be all uppercase with words seperated by underscore (_).
+```
+private static final Integer MONTHS_COUNT = 12;
 ```
 
 - Use meaningful names for yours variables.
@@ -85,20 +104,67 @@ public class AccountPlanService {
   }
   
   private Integer innerPrivateMethod() {
-    // ...
+    return 1;
   }
 }
 ```
 
-- For complex if statements assign 
+- For complex if statements assign todo..
 
 ```
 Boolean isValid = 
 ```
 ----------
 
-Unit Testing
---------
+## Unit Testing ##
+
+### Naming ###
+
+- Add `Test` suffix to test class name.
+
+```
+@isTest
+public class MyServiceTest {
+ // ...
+}
+```
+
+- Name test methods with `test<methodOrFunctionalityUnderTest><ShortTestCaseDesc>` pattern. For example: 
+
+> **Note:**  Use `@isTest` attribute rather then `testMethod` keyword.
+```
+@isTest
+public static void testSavingOpportunityWithoutTechonlogiesFieldRaiseError() {}
+```
+
+### Code structure ###
+
+- Use `Arrange`, `Act`, `Assert` pattern for unit test methods.
+
+> **Note:**  
+- Code that would be tested is placed beteen `Test.startTest()` and `Test.stopTest()`.
+
+```
+@isTest
+public static void testAddingMoreThenOneAccountPlanForAccountRaiseError() {
+    // Arrange
+    List<Account> accounts = new List<Account>();
+    for(Integer i = 0; i < 20; i++) {
+        accounts.add(new Account(Name = 'Account' + i));
+    }
+    insert accounts;
+    
+    // Act
+    Test.startTest();
+    Database.SaveResult[] result = Database.insert(accounts , false);
+    Test.stopTest();
+    
+    // Assert                
+    for(Integer i = 0; i < result .size(); i++) {         
+        System.assert(result[i].isSuccess());
+    }
+}  
+```
 
 ----------
 
