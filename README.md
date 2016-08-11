@@ -38,14 +38,14 @@ Methods | Camel
 > - Use abbreviations sparingly.
 > - Do not use the underscore character (_).
 
-```
+```java
 public class AccountPlanService {
   // ...
 }
 ```
 
 - Interface name should start with capital  `I` letter and follow the same rules as Classes. 
-```
+```java
 public interface IPurchaseOrder {
     Double discount();
 }
@@ -55,9 +55,9 @@ public interface IPurchaseOrder {
 
 > **Note:**  
 > - Built-in types should start with capital letter like ID, Integer, String. 
->  - Use verbs or verb phrases to name methods.
+> - Use verbs or verb phrases to name methods.
 
-```
+```java
 private String myPrivateField;
 
 public Integer myPublicProperty {
@@ -71,7 +71,7 @@ public static void myPublicMethod() {
 ```
 
 - Don't use `set`, `list`, `map` keywords for naming variable storing collections.
-```
+```java
 // avoid
 List<Account> accountsList = new List<Account>();
 Set<String> namesSet = new Set<String>();
@@ -84,12 +84,12 @@ Map<ID, Opporunity> opportunities= new Map<ID, Opportunity>();
 ```
 
 - Constant variables should be all uppercase with words seperated by underscore (_).
-```
+```java
 private static final Integer MONTHS_COUNT = 12;
 ```
 
 - Use meaningful names for yours variables.
-```
+```java
 Boolean isWinner = true;
 ```
 
@@ -122,7 +122,7 @@ Boolean isValid =
 
 - Add `Test` suffix to test class name.
 
-```
+```java
 @isTest
 public class MyServiceTest {
  // ...
@@ -132,7 +132,7 @@ public class MyServiceTest {
 - Name test methods with `test<methodOrFunctionalityUnderTest><ShortTestCaseDesc>` pattern. For example: 
 
 > **Note:**  Use `@isTest` attribute rather then `testMethod` keyword.
-```
+```java
 @isTest
 public static void testSavingOpportunityWithoutTechonlogiesFieldRaiseError() {}
 ```
@@ -144,7 +144,7 @@ public static void testSavingOpportunityWithoutTechonlogiesFieldRaiseError() {}
 > **Note:**  
 - Code that would be tested is placed beteen `Test.startTest()` and `Test.stopTest()`.
 
-```
+```java
 @isTest
 public static void testAddingMoreThenOneAccountPlanForAccountRaiseError() {
     // Arrange
