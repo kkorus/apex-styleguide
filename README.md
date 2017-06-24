@@ -131,7 +131,7 @@ public class MyServiceTest {
 
 - Name test methods with `test<methodOrFunctionalityUnderTest><ShortTestCaseDesc>` pattern. For example: 
 
-> **Note:**  Use `@isTest` attribute rather then `testMethod` keyword.
+> **Note:**  Use `@isTest` attribute rather than `testMethod` keyword.
 ```java
 @isTest
 public static void testSavingOpportunityWithoutTechonlogiesFieldRaiseError() {}
@@ -142,7 +142,7 @@ public static void testSavingOpportunityWithoutTechonlogiesFieldRaiseError() {}
 - Use `Arrange`, `Act`, `Assert` pattern for unit test methods.
 
 > **Note:**  
-- Code that would be tested is placed beteen `Test.startTest()` and `Test.stopTest()`.
+- Code that would be tested is placed between `Test.startTest()` and `Test.stopTest()`.
 
 ```java
 @isTest
